@@ -12,6 +12,48 @@ import stanford.karel.*;
 
 public class StoneMasonKarel extends SuperKarel {
 
-	// You fill in this part
+// You fill in this part
+  public void run() {
+    turnLeft();
+    fixOneColumn();
+    turnRight();
+    while(frontIsClear()) {
+      positionNextColumn();
+      fixOneColumn();
+      turnEast();
+    }
+  }
 
+  private void turnEast() {
+    if(facingSouth())
+      turnLeft();
+    else if(facingNorth())
+      turnRight();
+    else if(facingWest())
+      turnAround();
+  }
+
+  private void positionNextColumn() {
+    move();
+    move();
+    move();
+    move();
+    if(rightIsClear())
+      turnRight();
+    else {
+      turnLeft();
+    }
+  }
+
+  private void fixOneColumn() {
+    while(frontIsClear()) {
+      if(!beepersPresent()) {
+        putBeeper();
+      }
+      move();
+    }
+    if(!beepersPresent()) {
+      putBeeper();
+    }
+  }
 }
